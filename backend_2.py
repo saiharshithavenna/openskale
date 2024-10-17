@@ -2,6 +2,7 @@ import csv
 
 def min_price_calculation(csv_file, food_items):
     #add the food_items as input
+    #set removes the duplicate values
     food_items = set(food_items.replace('+', ' ').split())
 
     #dictionary to store restaurant data
@@ -29,6 +30,7 @@ def min_price_calculation(csv_file, food_items):
 
     # if not found all the food items return not found
     if not food_items.issubset(food_items_found):
+        #issubset() used to check all required items in a restaurant
         return "No matching found"
 
     # Filter restaurants that have all the required food items
@@ -48,7 +50,7 @@ def min_price_calculation(csv_file, food_items):
     else:
         return best_restaurant, min_price
 
-# Sample usage
+#output
 csv_file = 'question_two_data.csv'
 food_items = "extreme_fajita+jalapeno_poppers+extra_salsa"
 result = min_price_calculation(csv_file, food_items)

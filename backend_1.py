@@ -1,20 +1,24 @@
 def directory_size(filesystem, path):
-    #split the path based on dot
+    #file_system is the structure
+    #path is a string which defines the desired dictory path
+    #split the path string based on dot(example root.dir1.subdir1)
     parts = path.split('.')
     
     current_directory = filesystem
 
-    #traverse the directory
+    #traverse the directory in every path sting
     for part in parts:
         if part in current_directory:
             current_directory = current_directory[part]
         else:
-            return f"Directory '{path}' not found."
+            return f"Directory '{path}' not found"
     
     #calculate total size of files in the current directory
     def calculate_size(directory):
         total_size = 0
         for item, value in directory.items():
+            #the value represents the subdiretory which is a dict or not,if it is a dict it is a subdirectory
+            #isinsatnce() is used to check the type of an object
             if isinstance(value, dict):  
                 total_size += calculate_size(value)
             else:  
@@ -23,7 +27,7 @@ def directory_size(filesystem, path):
     
     # calculate the total size in the specified directory
     total_size = calculate_size(current_directory)
-    return f"Total size: {total_size}"
+    return f"Total_size: {total_size}"
 
 #load examples of directories
 filesystem = {
@@ -95,7 +99,7 @@ filesystem = {
     }
 }
 
-#example usage
+#output
 path = "root.dir1.subdir1.subsubdir1"
 result = directory_size(filesystem, path)
 print(result)  
